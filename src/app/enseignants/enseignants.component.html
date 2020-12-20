@@ -1,0 +1,294 @@
+
+<div class="container">
+    <div class="row">
+    <div class="col-2">
+    
+        <button class="btn btn-md btn-outline-primary" (click) = "resetDB()"  >
+            
+          
+        <i class="fa fa-user"> </i>  Reload BD </button>
+    
+        
+        </div>
+    <div class="col-4">
+    
+    <button class="btn btn-md btn-outline-primary" (click) = "open(content)"  >
+        
+      
+    <i class="fa fa-user"> </i> Ajout Engseignant </button>
+
+    
+    </div>
+    <div class="col-4">
+        <input type="text" id="searching">
+        <button class="btn btn-md btn-outline-primary" (click) = "search()"  >
+        
+      
+            <i class="fa fa-user"> </i> Search By ID </button>
+    </div>
+
+
+</div>
+    <table class="table table- bordered table-striped">
+    
+    <thead>
+    
+    <tr>
+    
+    <th> ID </th>
+    
+    <th> Prenom </th>
+    
+    <th> Nom </th>
+    
+    
+    
+    <th> Actions </th>
+    
+    </tr>
+    
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let enseignants of enseignant">
+
+        
+        <td> <span> {{enseignants.matricule  }} </span> </td>
+        
+        <td> <span> {{enseignants.nom_Ens}} </span> </td>
+        
+        <td> <span> {{enseignants.prenom_Ens}} </span> </td>
+        
+        <td>
+        
+        <button class="btn btn-sm btn-info" (click)="openDetails(contentDetails,enseignants)">
+        
+        <i class="fa fa-search"> </i> Details </button>
+        
+        <button class="btn btn-sm btn-warning" (click)="openEdit(contentedit,enseignants)">
+        
+        <i class="fa fa-edit"> </i> Update </button>
+        
+        <button class="btn btn-sm btn-danger" (click)="openDelete(contentDelete,enseignants)">
+        
+        <i class="fa fa-remove"> </i> Delete </button>
+        
+        </td>
+        
+        </tr>
+        
+        </tbody>
+        
+        </table></div>
+        <ng-template #content let-modal>
+
+            <div class = "modal-header">
+            
+            <h4 class = "modal-title" numInsciption = "modal-basic-title" > Ajout Enseignant </h4>
+            
+            <button type = "button" class = "close" aria-label = "Close" (click) = "modal.ignore ('Cross click')">
+            
+            <span aria-hidden = "true">&times;</span>
+            
+            </button>
+            
+            </div>
+            <div class = "modal-body">
+
+                <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+                
+                <div class = "form-group">
+                
+                <label for = "nom_Ens" > Donner ton Nom </label>
+                
+                <div class = "input-group" >
+                
+                <input numInscription = "nom_Ens" name = "nom_Ens" class = "form-control" ngModel>
+                
+                </div>
+                
+                </div>
+                
+                <div class="form-group">
+                
+                <label for="prenom_Etu"> Prenom </label>
+                
+                <div class="input-group">
+                
+                <input numInscription="prenom_Ens" name = "prenom_Ens" class="form-control" ngModel>
+                
+                </div>
+                
+                </div>
+                
+                <div class="border text-center">
+                
+                <button data-dismiss="modal" class="btn btn-info" type="submit">Submit</button>
+                
+                </div>
+                
+                </form>
+                
+                </div>
+                
+                <div class = "modal-footer">
+                
+                <button type = "button" class = "btn btn-outline-sombre" (click)="modal.close ('Save click')"> Close </button>
+                
+                </div>
+                
+                </ng-template>
+                <ng-template #contentDetails let-modal>
+
+                    <div class="modal-header">
+                    
+                    <h4 class="modal-title" numInsciption="modal-basic-title"> Enseignant details </h4>
+                    
+                    <button type="button" class="close" aria-label="Close" (click)="modal.ignore ('Cross click')">
+                    
+                    <span aria-hidden="true">&times;</span>
+                    
+                    </button>
+                    
+                    </div>
+                    
+                    <div class="modal-body">
+                    
+                    <form>
+                    
+                    <div class="form-group">
+                    
+                    <label for="nom_Etu">Nom</label>
+                    
+                    <div class="input-group">
+                    
+                    <input numInscription="nom_Etu" id="nom_Etu" class="form-control" readonly>
+                    
+                    </div></div>
+                    
+                    <div class="form-group">
+                    
+                    <label for="prenom_Etu">Prenom</label>
+                    
+                    <div class="input-group">
+                    
+                    <input numInscription="prenom_Etu" id="prenom_Etu" class="form-control" readonly>
+                    
+                    </div>
+                    
+                    </div>
+                    
+                    </form>
+                    
+                    </div>
+                    
+                    <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-outline-sombre" (click)="modal.close ('Save click')">
+                    Close </button>
+                    
+                    </div></ng-template>
+                    <ng-template #contentedit let-modal>
+
+                        <div class = "modal-header">
+                        
+                        <h4 class = "modal-title" numInsciption = "modal-basic-title" > Update Enseignant </h4>
+                        
+                        <button type = "button" class = "close" aria-label = "Close" (click) = "modal.ignore ('Cross click')">
+                        
+                        <span aria-hidden = "true">&times;</span>
+                        
+                        </button>
+                        
+                        </div>
+                        <div class = "modal-body">
+            
+                            <form #f="ngForm" novalidate>
+                                <div class = "form-group">
+                            
+                                    <label for = "num_Insc" > ID</label>
+                                    
+                                    <div class = "input-group" >
+                                    
+                                    <input id="numid" numInscription = "num_Insc" name = "num_Insc" class = "form-control" readonly>
+                                    
+                                    </div>
+                                    
+                                    </div>
+                            
+                            <div class = "form-group">
+                            
+                            <label for = "nom_Etu" >  Nom </label>
+                            
+                            <div class = "input-group" >
+                            
+                            <input id="nouvellenom" numInscription = "nom_Etu" name = "nom_Etu" class = "form-control" ngModel>
+                            
+                            </div>
+                            
+                            </div>
+                            
+                            <div class="form-group">
+                            
+                            <label for="prenom_Etu">  Prenom </label>
+                            
+                            <div class="input-group">
+                            
+                            <input id="nouvelleprenom" numInscription="prenom_Etu" name = "prenom_Etu" class="form-control" ngModel>
+                            
+                            </div>
+                            
+                            </div>
+                            
+                            <div class="border text-center">
+                            
+                            <button data-dismiss="modal" class="btn btn-info" (click)="onSave()" >Save Changes
+                            </button>
+                            
+                            </div>
+                            
+                            </form>
+                            
+                            </div>
+                            
+                            <div class = "modal-footer">
+                            
+                            <button type = "button" class = "btn btn-outline-sombre" (click)="modal.close ('Save click')"> Close </button>
+                            
+                            </div>
+                            
+                            </ng-template>
+                            <ng-template #contentDelete let-modal>
+
+                                <div class="modal-header">
+                                
+                                <h4 class="modal-title">Confirm Delete</h4>
+                                
+                                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                
+                                <span aria-hidden="true">&times;</span>
+                                
+                                </button>
+                                
+                                </div>
+                                
+                                <div class="modal-body">
+                                
+                                <h2>Are you sure you want to delete this record.</h2>
+                                
+                                <div class="border text-center">
+                                
+                                <button data-dismiss="modal" class="btn btn-danger" (click)="onDelete()">Yes, Delete!</button>
+                                
+                                </div>
+                                
+                                </div>
+                                
+                                <div class="modal-footer">
+                                
+                                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+                                
+                                </div>
+                                
+                                </ng-template>
+                 
